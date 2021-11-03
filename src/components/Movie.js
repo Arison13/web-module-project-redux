@@ -8,9 +8,7 @@ import { deleteMovie } from '../actions/movieActions';
 const Movie = (props) => {
     const { id } = useParams();
     const { push } = useHistory();
-    
-    console.log("MOVIE PROPS:", props)
- 
+     
     const movies = props.movies;
     const movie = movies.find(movie=>movie.id===Number(id));
 
@@ -18,6 +16,7 @@ const Movie = (props) => {
         props.deleteMovie(movie.id)
         push('/movies')
     }
+
     return(<div className="modal-page col">
         <div className="modal-dialog">
             <div className="modal-content">
@@ -59,7 +58,8 @@ const Movie = (props) => {
 
 const mapStateToProps = (state) => {
     return ({
-        movies : state.movies
+        movies : state.movie.movies,
+        displayFavorites: state.favorite.displayFavorites
     })
 }
 export default connect(mapStateToProps, {deleteMovie} )(Movie);
